@@ -1,0 +1,28 @@
+{
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/*.pyc": true,
+    "**/__pycache__/": true,
+    "**/.venv/": true,
+    "*.egg-info": true,
+    ".tox": true
+  },
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "**/*.code-search": true
+  },
+  "python.pythonPath": "${workspaceFolder}/.venv/bin/python3.8",
+  "python.terminal.activateEnvInCurrentTerminal": true,
+  "[python]": {
+    "editor.formatOnSave": true
+  },
+  "python.formatting.provider": "black",
+  "python.linting.flake8Enabled": true,
+  "python.languageServer": "Pylance",
+  "restructuredtext.confPath": ""
+}
