@@ -73,4 +73,11 @@ PAYMENTS = {
         "email_company": os.environ.get("TINKOFF_EMAIL_COMPANY"),
         "taxation": os.environ.get("TINKOFF_TAXATION"),
     },
+    "PAYEER": {
+        "account": os.environ.get("PAYEER_ACCOUNT"),
+        "api_id": os.environ.get("PAYEER_API_ID"),
+        "api_password": os.environ.get("PAYEER_API_PASSWORD"),
+        "shop_id": os.environ.get("PAYEER_SHOP_ID"),
+        "secret_key": os.environ.get("PAYEER_SECRET_KEY"),
+    },
 }

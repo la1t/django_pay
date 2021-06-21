@@ -5,3 +5,4 @@ zest.releaser
 black
 rope
 pre-commit
+ipython

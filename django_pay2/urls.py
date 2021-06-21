@@ -23,4 +23,5 @@ urlpatterns = [
         name="debug_reject",
     ),
     path("tinkoff/", include("django_pay2.providers.tinkoff.urls")),
+    path("payeer/", include("django_pay2.providers.payeer.urls")),
 ]

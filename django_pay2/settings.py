@@ -14,6 +14,13 @@ DEFAULTS = {
         "email_company": None,
         "taxation": None,
     },
+    "PAYEER": {
+        "account": None,
+        "api_id": None,
+        "api_password": None,
+        "shop_id": None,
+        "secret_key": None,
+    },
 }
 
 IMPORT_DICTS = []
