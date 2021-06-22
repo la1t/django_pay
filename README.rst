@@ -49,7 +49,6 @@ TODO
 --------
 
 - [*] Сериализаторы для PaymentForm и RedirectMethod
-- [ ] Возможность задать тип поля для `Payment.object_id`
 - [ ] Интеграция с free_kassa
 - [ ] `handle_form_debug` проверяет, что ему пришла валидная форма
 - [*] Переписывание тестов на pytest
