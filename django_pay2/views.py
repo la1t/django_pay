@@ -18,6 +18,9 @@ class DebugPaymentView(DebugMixin, generic.DetailView):
     queryset = Payment.objects.filter(status=Payment.StatusType.PENDING)
     template_name = "django_pay2/debug_payment.html"
 
+    def post(self, request, *args, **kwargs):
+        return self.get(request, *args, **kwargs)
+
 
 class AcceptDebugPaymentView(DebugMixin, SingleObjectMixin, generic.View):
     queryset = Payment.objects.filter(status=Payment.StatusType.PENDING)

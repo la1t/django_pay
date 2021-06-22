@@ -71,12 +71,13 @@ class PayeerApi:
             notify_request.operation_pay_date,
             notify_request.shop,
             notify_request.order_id,
-            str(notify_request.amount),
+            notify_request.amount,
             notify_request.currency,
             notify_request.desc,
             notify_request.status,
             self.secret_key,
         ]
+        hash_list = [str(s) for s in hash_list]
         return hashlib.sha256(":".join(hash_list).encode("utf-8")).hexdigest().upper()
 
 

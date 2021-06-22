@@ -21,6 +21,11 @@ DEFAULTS = {
         "shop_id": None,
         "secret_key": None,
     },
+    "FREE_KASSA": {
+        "merchant_id": None,
+        "secret_word_1": None,
+        "secret_word_2": None,
+    },
 }
 
 IMPORT_DICTS = []

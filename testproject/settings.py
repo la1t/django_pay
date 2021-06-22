@@ -80,4 +80,9 @@ PAYMENTS = {
         "shop_id": os.environ.get("PAYEER_SHOP_ID"),
         "secret_key": os.environ.get("PAYEER_SECRET_KEY"),
     },
+    "FREE_KASSA": {
+        "merchant_id": os.environ.get("FREE_KASSA_MERCHANT_ID"),
+        "secret_word_1": os.environ.get("FREE_KASSA_SECRET_WORD_1"),
+        "secret_word_2": os.environ.get("FREE_KASSA_SECRET_WORD_2"),
+    },
 }

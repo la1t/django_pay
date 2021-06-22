@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+  >
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Заказ</title>
+</head>
+<body>
+<form action="" method="post" id="orderForm">
+  {% csrf_token %}
+
+  {{ form.as_p }}
+  <button type="submit">Pay</button>
+</form>
+
+<form id="paymentForm" action="" method="post"></form>
+
+<script>
+  const orderForm = document.getElementById('orderForm');
+  const paymentForm = document.getElementById('paymentForm');
+
+  orderForm.addEventListener('submit', (ev) => {
+    ev.preventDefault();
+    (async () => {
+      const formData = new FormData();
+      for (let field of orderForm.elements) {
+        formData.append(field.name, field.value);
+      }
+      const response = await fetch('', {method: 'post', body: formData});
+      const responseData = await response.json()
+      paymentForm.action = responseData['url'];
+      Object.keys(responseData['fields']).forEach(fieldName => {
+        const field = document.createElement('input');
+        field.type = 'hidden';
+        field.name = fieldName;
+        field.value = responseData['fields'][fieldName];
+        paymentForm.append(field);
+      });
+      paymentForm.submit();
+    })();
+  })
+</script>
+</body>
+</html>

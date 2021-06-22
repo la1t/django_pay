@@ -1,26 +1,34 @@
-from django.test import TestCase
+import pytest
 
 from django_pay2.models import Payment
 from django_pay2.signals import payment_received
 
 from .models import TestInvoice
-from .utils import SignalsMixin
+from .utils import assert_signal_sent
+
+pytestmark = pytest.mark.django_db
 
 
-class PaymentTests(SignalsMixin, TestCase):
-    def setUp(self) -> None:
-        self.invoice = TestInvoice.objects.create()
-        self.payment = Payment.objects.create(amount=100, receiver=self.invoice)
+@pytest.fixture
+def invoice():
+    return TestInvoice.objects.create()
 
-    def test_accept(self):
-        with self.assert_signal_sent(
-            payment_received, TestInvoice, receiver=self.invoice
-        ):
-            self.payment.accept()
-        self.payment.refresh_from_db()
-        self.assertEqual(self.payment.status, Payment.StatusType.SUCCESS)
 
-    def test_reject(self):
-        self.payment.reject()
-        self.payment.refresh_from_db()
-        self.assertEqual(self.payment.status, Payment.StatusType.REJECTED)
+@pytest.fixture
+def payment(invoice):
+    return Payment.objects.create(amount=100, receiver=invoice)
+
+
+def test_payment_accept(invoice, payment):
+    with assert_signal_sent(payment_received, TestInvoice, receiver=invoice):
+        payment.accept()
+
+    payment.refresh_from_db()
+    assert payment.status == Payment.StatusType.SUCCESS
+
+
+def test_payment_reject(payment):
+    payment.reject()
+
+    payment.refresh_from_db()
+    assert payment.status == Payment.StatusType.REJECTED

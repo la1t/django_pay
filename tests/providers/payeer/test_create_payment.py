@@ -1,3 +1,5 @@
+import pytest
+
 from decimal import Decimal
 from django.test import TestCase
 from unittest.mock import patch
@@ -11,52 +13,47 @@ from django_pay2.exceptions import CreatePaymentError
 
 from tests.models import TestInvoice
 
+pytestmark = pytest.mark.django_db
 
-class TestCreatePayeerPayment(TestCase):
-    req_factory = RequestFactory()
 
-    def setUp(self) -> None:
-        super().setUp()
-        self.invoice = TestInvoice.objects.create()
-
-    @patch(
+def test_positive(mocker, rf, test_invoice):
+    mocker.patch(
         "django_pay2.providers.payeer.api.PayeerApi.create_payment",
         return_value="https://example.com",
     )
-    def test_create_payment_if_payeer_api_does_not_return_errors(
-        self, patched_create_payment
-    ):
-        payment_url = create_payeer_payment(
-            self.req_factory.get("/"),
-            receiver=self.invoice,
+    payment_url = create_payeer_payment(
+        rf.get("/"),
+        receiver=test_invoice,
+        amount=Decimal(100),
+        currency="USD",
+        desc="Test",
+    )
+
+    assert payment_url == "https://example.com"
+    assert Payment.objects.count() == 1
+    payment = Payment.objects.get()
+    assert payment.amount == Decimal(100)
+    assert payment.receiver == test_invoice
+    assert payment.status == Payment.StatusType.PENDING
+
+
+def test_reject_payment_and_raise_err_if_payeer_api_returned_err(
+    mocker, rf, test_invoice
+):
+    mocker.patch(
+        "django_pay2.providers.payeer.api.PayeerApi.create_payment",
+        side_effect=PayeerError(["test"]),
+    )
+
+    with pytest.raises(CreatePaymentError):
+        create_payeer_payment(
+            request=rf.get("/"),
+            receiver=test_invoice,
             amount=Decimal(100),
             currency="USD",
             desc="Test",
         )
 
-        self.assertEqual(payment_url, "https://example.com")
-        self.assertEqual(Payment.objects.count(), 1)
-        payment = Payment.objects.get()
-        self.assertEqual(payment.amount, Decimal(100))
-        self.assertEqual(payment.receiver, self.invoice)
-        self.assertEqual(payment.status, Payment.StatusType.PENDING)
-
-    @patch(
-        "django_pay2.providers.payeer.api.PayeerApi.create_payment",
-        side_effect=PayeerError(["test"]),
-    )
-    def test_reject_payment_and_raise_err_if_payeer_api_returns_error(
-        self, patched_created_payment
-    ):
-        with self.assertRaises(CreatePaymentError):
-            create_payeer_payment(
-                request=self.req_factory.get("/"),
-                receiver=self.invoice,
-                amount=Decimal(100),
-                currency="USD",
-                desc="Test",
-            )
-
-        self.assertEqual(Payment.objects.count(), 1)
-        payment = Payment.objects.get()
-        self.assertEqual(payment.status, Payment.StatusType.REJECTED)
+    assert Payment.objects.count() == 1
+    payment = Payment.objects.get()
+    assert payment.status == Payment.StatusType.REJECTED
