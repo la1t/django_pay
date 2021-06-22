@@ -21,7 +21,7 @@ def test_generate_form(api, uid):
     payment_method = api.generate_payment_method(100, uid)
 
     assert payment_method.method == "form"
-    assert payment_method.url == "https://www.free-kassa.ru/merchant/cash.php"
+    assert payment_method.action == "https://www.free-kassa.ru/merchant/cash.php"
     assert payment_method.fields.get("m") == "qwerty"
     assert payment_method.fields.get("oa") == "100"
     assert payment_method.fields.get("o") == str(uid)

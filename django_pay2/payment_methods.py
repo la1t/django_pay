@@ -11,5 +11,5 @@ class PaymentRedirect:
 @dataclass
 class PaymentForm:
     method = "form"
-    url: str
+    action: str
     fields: Dict[str, str]

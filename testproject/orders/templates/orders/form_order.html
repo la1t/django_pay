@@ -32,7 +32,7 @@
       }
       const response = await fetch('', {method: 'post', body: formData});
       const responseData = await response.json()
-      paymentForm.action = responseData['url'];
+      paymentForm.action = responseData['action'];
       Object.keys(responseData['fields']).forEach(fieldName => {
         const field = document.createElement('input');
         field.type = 'hidden';

@@ -13,8 +13,8 @@ class FreeKassaApi:
 
     def generate_payment_method(self, amount, order_id):
         return PaymentForm(
-            self.form_url,
-            {
+            action=self.form_url,
+            fields={
                 "m": self.merchant_id,
                 "oa": str(amount),
                 "o": str(order_id),

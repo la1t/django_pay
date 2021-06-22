@@ -8,6 +8,7 @@ from django_pay2.exceptions import CreatePaymentError
 from django_pay2.models import Payment
 from django_pay2.providers.tinkoff.entities.init import InitRequest, Item, Receipt
 from django_pay2.settings import payment_settings
+from django_pay2.payment_methods import PaymentRedirect
 
 from .exceptions import TinkoffApiError
 from .functions import get_tinkoff_api
@@ -31,7 +32,7 @@ def create_tinkoff_payment(
             request, amount, desc, items, str(payment.id), client_email, client_phone
         )
         init_response = api.init(init_request)
-        return init_response.payment_url
+        return PaymentRedirect(init_response.payment_url)
     except TinkoffApiError as exc:
         payment.reject()
         raise CreatePaymentError(str(exc))

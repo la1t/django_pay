@@ -4,6 +4,7 @@ import hashlib
 
 from django_pay2.models import Payment
 from .exceptions import PayeerError, PayeerValidationError, AlreadyPaid
+from django_pay2.payment_methods import PaymentRedirect
 
 
 class PayeerApi:
@@ -44,7 +45,7 @@ class PayeerApi:
         response_data = response.json()
         if not response_data["success"]:
             raise PayeerError(response_data["errors"])
-        return response_data["url"]
+        return PaymentRedirect(response_data["url"])
 
     def notify(self, data):
         try:
