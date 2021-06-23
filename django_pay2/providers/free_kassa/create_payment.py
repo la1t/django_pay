@@ -8,4 +8,4 @@ from .api import get_api
 def create_free_kassa_payment(request, amount, desc, receiver):
     payment = Payment.objects.create(amount=amount, receiver=receiver)
     api = get_api()
-    return api.generate_form(amount, payment.id)
+    return api.generate_payment_method(amount, payment.id)

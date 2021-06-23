@@ -1,5 +1,3 @@
-import json
-
 from django.http import HttpResponse
 from django.utils.decorators import method_decorator
 from django.views import generic

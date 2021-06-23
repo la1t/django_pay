@@ -26,6 +26,10 @@ class FreeKassaApi:
         hash_str = f"{self.merchant_id}:{amount}:{self.secret_word_1}:{order_id}"
         return hashlib.md5(hash_str.encode("utf-8")).hexdigest()
 
+    def generate_notify_sign(self, amount, order_id):
+        hash_str = f"{self.merchant_id}:{amount}:{self.secret_word_2}:{order_id}"
+        return hashlib.md5(hash_str.encode("utf-8")).hexdigest()
+
 
 def get_api():
     return FreeKassaApi(
