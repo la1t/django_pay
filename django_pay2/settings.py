@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.test.signals import setting_changed
+from django.urls import reverse_lazy
 from django.utils.module_loading import import_string
 
 DEFAULTS = {
@@ -25,6 +26,14 @@ DEFAULTS = {
         "merchant_id": None,
         "secret_word_1": None,
         "secret_word_2": None,
+    },
+    "PERFECT_MONEY": {
+        "payee_usd_account": None,
+        "payee_eur_account": None,
+        "payee_name": None,
+        "alternate_passphrase": None,
+        "success_url": reverse_lazy("django_pay2:success"),
+        "failed_url": reverse_lazy("django_pay2:fail"),
     },
 }
 

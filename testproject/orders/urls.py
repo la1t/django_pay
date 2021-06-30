@@ -11,4 +11,9 @@ urlpatterns = [
         views.FreeKassaOrderView.as_view(),
         name="free_kassa_order",
     ),
+    path(
+        "perfect_money/",
+        views.PerfectMoneyOrderView.as_view(),
+        name="perfect_money_order",
+    ),
 ]

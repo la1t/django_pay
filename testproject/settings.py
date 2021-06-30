@@ -85,4 +85,10 @@ PAYMENTS = {
         "secret_word_1": os.environ.get("FREE_KASSA_SECRET_WORD_1"),
         "secret_word_2": os.environ.get("FREE_KASSA_SECRET_WORD_2"),
     },
+    "PERFECT_MONEY": {
+        "payee_usd_account": os.environ.get("PERFECT_MONEY_PAYEE_USD_ACCOUNT"),
+        "payee_eur_account": os.environ.get("PERFECT_MONEY_PAYEE_EUR_ACCOUNT"),
+        "payee_name": os.environ.get("PERFECT_MONEY_PAYEE_NAME"),
+        "alternate_passphrase": os.environ.get("PERFECT_MONEY_ALTERNATE_PASSPHRASE"),
+    },
 }

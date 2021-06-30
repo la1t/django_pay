@@ -1,17 +1,11 @@
 import pytest
 
 from decimal import Decimal
-from django.test import TestCase
-from unittest.mock import patch
-
-from django.test.client import RequestFactory
 
 from django_pay2.providers.payeer.create_payment import create_payeer_payment
 from django_pay2.providers.payeer.api import PayeerError
 from django_pay2.models import Payment
 from django_pay2.exceptions import CreatePaymentError
-
-from tests.models import TestInvoice
 
 pytestmark = pytest.mark.django_db
 
