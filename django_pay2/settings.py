@@ -35,6 +35,13 @@ DEFAULTS = {
         "success_url": reverse_lazy("django_pay2:success"),
         "failed_url": reverse_lazy("django_pay2:fail"),
     },
+    "COINPAYMENTS": {
+        "public_key": None,
+        "private_key": None,
+        "ipn_secret": None,
+        "success_url": reverse_lazy("django_pay2:success"),
+        "cancel_url": reverse_lazy("django_pay2:fail"),
+    },
 }
 
 IMPORT_DICTS = []
