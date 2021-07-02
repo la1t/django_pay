@@ -1,5 +1,4 @@
 from django_pay2.decorators import handle_debug
-from django_pay2.exceptions import CreatePaymentError
 from django_pay2.models import Payment
 
 from .api import get_api

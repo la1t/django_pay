@@ -60,7 +60,7 @@ class CoinPaymentsApi:
 
     def create_hmac(self, encoded_body):
         return hmac.new(
-            bytes(self.ipn_secret, "utf-8"),
+            bytes(self.private_key, "utf-8"),
             encoded_body.encode("utf-8"),
             hashlib.sha512,
         ).hexdigest()

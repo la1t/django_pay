@@ -16,4 +16,9 @@ urlpatterns = [
         views.PerfectMoneyOrderView.as_view(),
         name="perfect_money_order",
     ),
+    path(
+        "coinpayments/",
+        views.CoinPaymentsOrderView.as_view(),
+        name="coinpayments_order",
+    ),
 ]

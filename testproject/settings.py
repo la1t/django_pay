@@ -33,6 +33,9 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
+USE_X_FORWARDED_HOST = True
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+
 # DATABASES
 # ------------------------------------------------------------------------------
 
@@ -90,5 +93,10 @@ PAYMENTS = {
         "payee_eur_account": os.environ.get("PERFECT_MONEY_PAYEE_EUR_ACCOUNT"),
         "payee_name": os.environ.get("PERFECT_MONEY_PAYEE_NAME"),
         "alternate_passphrase": os.environ.get("PERFECT_MONEY_ALTERNATE_PASSPHRASE"),
+    },
+    "COINPAYMENTS": {
+        "public_key": os.environ.get("COINPAYMENTS_PUBLIC_KEY"),
+        "private_key": os.environ.get("COINPAYMENTS_PRIVATE_KEY"),
+        "ipn_secret": os.environ.get("COINPAYMENT_IPN_SECRET"),
     },
 }
