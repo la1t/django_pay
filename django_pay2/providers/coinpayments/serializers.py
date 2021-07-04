@@ -10,4 +10,6 @@ class CoinPaymentsApproveSerializer(serializers.Serializer):
     default_error_messages = {"not_done_status": "Not done status"}
 
     def validate_status(self, value):
-        return value >= 100 or value == 2
+        if not (value >= 100 or value == 2):
+            self.fail("not_done_status")
+        return value
