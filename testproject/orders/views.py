@@ -9,6 +9,7 @@ from django_pay2.providers.tinkoff.entities.init import Item
 from django_pay2.providers.payeer import create_payeer_payment
 from django_pay2.providers.perfect_money import create_perfect_money_payment
 from django_pay2.providers.coinpayments import create_coinpayments_payment
+from django_pay2.providers.qiwi import create_qiwi_payment
 
 from .forms import OrderForm
 from .models import Order
@@ -128,4 +129,16 @@ class CoinPaymentsOrderView(generic.FormView):
             buyer_email="client@example.com",
             currency="ETH",
         )
+        return redirect(payment_method.url)
+
+
+class QiwiOrderView(generic.FormView):
+    template_name = "orders/order.html"
+    form_class = OrderForm
+
+    def form_valid(self, form):
+        desc = form.cleaned_data["desc"]
+        amount = form.cleaned_data["amount"]
+        order = Order.objects.create(desc=desc)
+        payment_method = create_qiwi_payment(self.request, amount, desc, order, "RUB")
         return redirect(payment_method.url)

@@ -21,4 +21,5 @@ urlpatterns = [
         views.CoinPaymentsOrderView.as_view(),
         name="coinpayments_order",
     ),
+    path("qiwi/", views.QiwiOrderView.as_view(), name="qiwi_order"),
 ]

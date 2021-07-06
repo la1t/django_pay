@@ -99,4 +99,7 @@ PAYMENTS = {
         "private_key": os.environ.get("COINPAYMENTS_PRIVATE_KEY"),
         "ipn_secret": os.environ.get("COINPAYMENT_IPN_SECRET"),
     },
+    "QIWI": {
+        "secret_key": os.environ.get("QIWI_SECRET_KEY"),
+    },
 }

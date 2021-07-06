@@ -42,6 +42,9 @@ DEFAULTS = {
         "success_url": reverse_lazy("django_pay2:success"),
         "cancel_url": reverse_lazy("django_pay2:fail"),
     },
+    "QIWI": {
+        "secret_key": None,
+    },
 }
 
 IMPORT_DICTS = []
