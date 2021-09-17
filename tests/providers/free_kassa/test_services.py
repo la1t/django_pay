@@ -2,14 +2,8 @@ from rest_framework.exceptions import ValidationError
 from django_pay2.providers.free_kassa.services import handle_notify
 import pytest
 from django_pay2.models import Payment
-from django_pay2.settings import payment_settings, reload_app_settings
 
 pytestmark = pytest.mark.django_db
-
-
-@pytest.fixture
-def sample_uid():
-    return "9234e6e7-d737-40f8-8fd3-e876116aab0b"
 
 
 class TestHandleNotify:
@@ -30,7 +24,7 @@ class TestHandleNotify:
                 "MERCHANT_ID": "qwerty",
                 "AMOUNT": 100.0,
                 "MERCHANT_ORDER_ID": sample_uid,
-                "SIGN": "14f62ce3d1aab19979913ee3855acdd1",
+                "SIGN": "aee8dcfb58b752160ed9e650a0d6b59f",
             }
         )
 
@@ -46,7 +40,7 @@ class TestHandleNotify:
                     "MERCHANT_ID": "incorrect",
                     "AMOUNT": 100,
                     "MERCHANT_ORDER_ID": sample_uid,
-                    "SIGN": "14f62ce3d1aab19979913ee3855acdd1",
+                    "SIGN": "aee8dcfb58b752160ed9e650a0d6b59f",
                 }
             )
 
@@ -59,7 +53,7 @@ class TestHandleNotify:
                     "MERCHANT_ID": "qwerty",
                     "AMOUNT": 5,
                     "MERCHANT_ORDER_ID": sample_uid,
-                    "SIGN": "14f62ce3d1aab19979913ee3855acdd1",
+                    "SIGN": "aee8dcfb58b752160ed9e650a0d6b59f",
                 }
             )
 

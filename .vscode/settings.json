@@ -9,7 +9,9 @@
     "**/__pycache__/": true,
     "**/.venv/": true,
     "*.egg-info": true,
-    ".tox": true
+    ".tox": true,
+    ".pytest_cache/": true,
+    ".coverage": true
   },
   "search.exclude": {
     "**/node_modules": true,

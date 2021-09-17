@@ -9,15 +9,15 @@ def test_perfect_money_api_generate_payment_method(api, rf, sample_uid):
 
     method = api.generate_payment_method(request, D("100.00"), "USD", sample_uid)
 
-    assert method.fields["payee_account"] == "U123456"
-    assert method.fields["payee_name"] == "john.due"
-    assert method.fields["payment_amount"] == "100.00"
-    assert method.fields["payment_units"] == "USD"
-    assert method.fields["payment_id"] == sample_uid
-    assert "/perfect-money/notify/" in method.fields["status_url"]
-    assert "/success/" in method.fields["payment_url"]
-    assert "/failed/" in method.fields["nopayment_url"]
-    assert method.fields["baggage_fields"] == ""
+    assert method.fields["PAYEE_ACCOUNT"] == "U123456"
+    assert method.fields["PAYEE_NAME"] == "john.due"
+    assert method.fields["PAYMENT_AMOUNT"] == "100.00"
+    assert method.fields["PAYMENT_UNITS"] == "USD"
+    assert method.fields["PAYMENT_ID"] == sample_uid
+    assert "/perfect-money/notify/" in method.fields["STATUS_URL"]
+    assert "/success/" in method.fields["PAYMENT_URL"]
+    assert "/failed/" in method.fields["NOPAYMENT_URL"]
+    assert method.fields["BAGGAGE_FIELDS"] == ""
 
 
 def test_perfect_money_api_calculate_sign(api):

@@ -27,4 +27,5 @@ urlpatterns = [
     path("perfect-money/", include("django_pay2.providers.perfect_money.urls")),
     path("coinpayments/", include("django_pay2.providers.coinpayments.urls")),
     path("qiwi/", include("django_pay2.providers.qiwi.urls")),
+    path("free-kassa/", include("django_pay2.providers.free_kassa.urls")),
 ]

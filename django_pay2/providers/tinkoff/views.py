@@ -1,28 +1,25 @@
-import json
+import logging
 
-from django.http import HttpResponse
-from django.utils.decorators import method_decorator
-from django.views import generic
-from django.views.decorators.csrf import csrf_exempt
+from rest_framework.views import APIView
+from rest_framework import status, renderers
+from rest_framework.response import Response
 
-from .exceptions import TinkoffNotifyValidationError
-from .functions import get_tinkoff_api
+from .serializers import NotifySerializer
+
+logger = logging.getLogger(__file__)
 
 
-@method_decorator(csrf_exempt, name="dispatch")
-class NotifyView(generic.View):
+class NotifyView(APIView):
+    renderer_classes = (renderers.StaticHTMLRenderer,)
+
     def post(self, request, *args, **kwargs):
-        try:
-            data = json.loads(request.body)
-        except json.JSONDecodeError:
-            print("JSON decode error")
-            return HttpResponse("JSON decode error", status=400)
-        api = get_tinkoff_api()
-        try:
-            result = api.notify(data)
-        except TinkoffNotifyValidationError as exc:
-            print(str(exc))
-            return HttpResponse(str(exc), status=400)
-
-        result.payment.accept()
-        return HttpResponse("OK")
+        serializer = NotifySerializer(
+            data=request.data, context={"raw_data": request.data}
+        )
+        if not serializer.is_valid():
+            logger.warning(
+                f"Tinkoff notification error: {serializer.errors}, orig data: {request.data}"
+            )
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+        serializer.validated_data["payment"].accept()
+        return Response("OK")

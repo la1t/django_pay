@@ -1,6 +1,7 @@
 import hashlib
 from django_pay2.settings import payment_settings
 from django_pay2.payment_methods import PaymentForm
+from django_pay2.utils import remove_trivial_zeros
 
 
 class FreeKassaApi:
@@ -27,7 +28,7 @@ class FreeKassaApi:
         return hashlib.md5(hash_str.encode("utf-8")).hexdigest()
 
     def generate_notify_sign(self, amount, order_id):
-        hash_str = f"{self.merchant_id}:{amount}:{self.secret_word_2}:{order_id}"
+        hash_str = f"{self.merchant_id}:{remove_trivial_zeros(amount)}:{self.secret_word_2}:{order_id}"
         return hashlib.md5(hash_str.encode("utf-8")).hexdigest()
 
 

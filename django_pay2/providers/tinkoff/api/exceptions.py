@@ -8,7 +8,7 @@ class TinkoffNetworkError(TinkoffApiError):
         self.text = text
 
     def __str__(self):
-        return f"Server sent response with status_code={self.status_code} and text={self.text}"
+        return f"status_code={self.status_code},text={self.text}"
 
 
 class TinkoffResponseError(TinkoffApiError):
@@ -18,17 +18,9 @@ class TinkoffResponseError(TinkoffApiError):
         self.details = details
 
     def __str__(self):
-        ret = str(self.error_code)
+        ret = f"error_code={self.error_code}"
         if self.message:
-            ret += f" {self.message}"
+            ret += f",message={self.message}"
         if self.details:
-            ret += f": {self.details}"
+            ret += f",details={self.details}"
         return ret
-
-
-class TinkoffNotifyValidationError(TinkoffApiError):
-    def __init__(self, msg: str):
-        self.msg = msg
-
-    def __str__(self):
-        return self.msg
