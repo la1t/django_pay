@@ -6,10 +6,15 @@ class MappingFieldsMixin:
     mapping_keys = {}
 
     def to_internal_value(self, data):
-        new_data = {
+        mapped_data = {
             new_key: data.get(old_key) for new_key, old_key in self.mapping_keys.items()
         }
-        return super().to_internal_value(new_data)
+        return super().to_internal_value(
+            {
+                **data,
+                **mapped_data,
+            }
+        )
 
 
 def remove_trivial_zeros(num):

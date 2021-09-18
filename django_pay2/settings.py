@@ -45,6 +45,13 @@ DEFAULTS = {
     "QIWI": {
         "secret_key": None,
     },
+    "SBERBANK": {
+        "username": None,
+        "password": None,
+        "return_url": reverse_lazy("django_pay2:success"),
+        "fail_url": reverse_lazy("django_pay2:fail"),
+        "public_key": None,
+    },
 }
 
 IMPORT_DICTS = []
