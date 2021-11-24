@@ -45,6 +45,10 @@ DEFAULTS = {
     "QIWI": {
         "secret_key": None,
     },
+    "QIWI_KASSA": {
+        "secret_key": None,
+        "site_id": None,
+    },
     "SBERBANK": {
         "username": None,
         "password": None,

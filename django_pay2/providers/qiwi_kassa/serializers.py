@@ -1,20 +1,17 @@
+import logging
+
 from rest_framework import serializers
 
 from django_pay2.models import Payment
-from django_pay2.utils import HmacDefault
+from django_pay2.utils import HmacDefault, MappingFieldsMixin
 
 from .api import get_api
+
+logger = logging.getLogger(__name__)
 
 
 class StatusSerializer(serializers.Serializer):
     value = serializers.CharField()
-
-    default_error_messages = {"unexpected_status": "Unexpected status"}
-
-    def validate_value(self, value):
-        if value != "PAID":
-            self.fail("unexpected_status")
-        return value
 
 
 class AmountSerializer(serializers.Serializer):
@@ -22,11 +19,18 @@ class AmountSerializer(serializers.Serializer):
     currency = serializers.CharField()
 
 
-class BillSerializer(serializers.Serializer):
-    site_id = serializers.CharField()
+class QiwiPaymentSerializer(MappingFieldsMixin, serializers.Serializer):
+    mapping_keys = {
+        "payment_id": "paymentId",
+        "bill_id": "billId",
+        "created_datetime": "createdDateTime",
+    }
+
+    payment_id = serializers.CharField()
     bill_id = serializers.PrimaryKeyRelatedField(queryset=Payment.objects.all())
     amount = AmountSerializer()
     status = StatusSerializer()
+    created_datetime = serializers.CharField()
 
     default_error_messages = {"mismatched_amount": "Mismatched amount"}
 
@@ -37,18 +41,9 @@ class BillSerializer(serializers.Serializer):
             self.fail("mismatched_amount")
         return attrs
 
-    def to_internal_value(self, data):
-        data = {
-            "bill_id": data.get("billId"),
-            "amount": data.get("amount"),
-            "status": data.get("status"),
-            "site_id": data.get("siteId"),
-        }
-        return super().to_internal_value(data)
 
-
-class QiwiNotifySerializer(serializers.Serializer):
-    bill = BillSerializer()
+class QiwiKassaNotifySerializer(serializers.Serializer):
+    payment = QiwiPaymentSerializer()
     hmac = serializers.HiddenField(default=HmacDefault())
 
     default_error_messages = {"mismatch_hmac": "Mismatch HMAC"}
@@ -56,12 +51,11 @@ class QiwiNotifySerializer(serializers.Serializer):
     def validate(self, attrs):
         attrs = super().validate(attrs)
         expected_hmac = get_api().create_hmac(
-            attrs["bill"]["amount"]["currency"],
-            str(attrs["bill"]["amount"]["value"]),
-            str(attrs["bill"]["bill_id"].id),
-            attrs["bill"]["site_id"],
-            attrs["bill"]["status"]["value"],
+            payment_id=attrs["payment"]["payment_id"],
+            created_datetime=attrs["payment"]["created_datetime"],
+            amount=attrs["payment"]["amount"]["value"],
         )
         if expected_hmac != attrs["hmac"]:
+            logger.info(f"Mismatch hmac: expected={expected_hmac} got={attrs['hmac']}")
             self.fail("mismatch_hmac")
         return attrs

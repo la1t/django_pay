@@ -102,4 +102,8 @@ PAYMENTS = {
     "QIWI": {
         "secret_key": os.environ.get("QIWI_SECRET_KEY"),
     },
+    "QIWI_KASSA": {
+        "secret_key": os.environ.get("QIWI_KASSA_SECRET_KEY"),
+        "site_id": os.environ.get("QIWI_KASSA_SITE_ID"),
+    },
 }

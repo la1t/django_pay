@@ -4,7 +4,6 @@ from . import views
 
 urlpatterns = [
     path("", views.DebugOrderView.as_view(), name="debug_order"),
-    path("tinkoff/", views.TinkoffOrderView.as_view(), name="tinkoff_order"),
     path("payeer/", views.PayeerOrderView.as_view(), name="payeer_order"),
     path(
         "free_kassa/",
@@ -22,4 +21,5 @@ urlpatterns = [
         name="coinpayments_order",
     ),
     path("qiwi/", views.QiwiOrderView.as_view(), name="qiwi_order"),
+    path("qiwi-kassa/", views.QiwiKassaOrderView.as_view(), name="qiwi_kassa_order"),
 ]

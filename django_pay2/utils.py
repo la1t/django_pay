@@ -20,3 +20,13 @@ class MappingFieldsMixin:
 def remove_trivial_zeros(num):
     num = str(num)
     return num.rstrip("0").rstrip(".")
+
+
+class HmacDefault:
+    requires_context = True
+
+    def __call__(self, serializer_field):
+        return serializer_field.context["hmac"]
+
+    def __repr__(self):
+        return "%s()" % self.__class__.__name__
