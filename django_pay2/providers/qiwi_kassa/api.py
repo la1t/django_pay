@@ -29,7 +29,7 @@ class QiwiKassaApi:
     def create_hmac(self, payment_id, created_datetime, amount):
         return hmac.new(
             self.secret_key.encode("utf-8"),
-            f"{payment_id}|{created_datetime}|{amount}",
+            f"{payment_id}|{created_datetime}|{amount}".encode("utf-8"),
             hashlib.sha256,
         ).hexdigest()
 
