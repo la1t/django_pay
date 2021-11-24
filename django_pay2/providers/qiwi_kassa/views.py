@@ -20,7 +20,7 @@ class QiwiKassaNotifyView(generics.GenericAPIView):
             logger.info(msg)
             return Response({"msg": msg})
 
-        request_hmac = request.META.get("HTTP_X_API_SIGNATURE_SHA256")
+        request_hmac = request.META.get("HTTP_SIGNATURE")
         serializer = QiwiKassaNotifySerializer(
             data=request.data,
             context={
