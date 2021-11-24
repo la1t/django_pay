@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "django_pay2"
-version = "1.5.3"
+version = "1.5.4"
 description = "Интеграция платежных систем для Django"
 authors = ["Anatoly Gusev <gusev.tolia@yandex.ru>"]
 license = "MIT"
