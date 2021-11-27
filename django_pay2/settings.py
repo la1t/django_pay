@@ -14,6 +14,8 @@ DEFAULTS = {
         "password": None,
         "email_company": None,
         "taxation": None,
+        "return_url": reverse_lazy("django_pay2:success"),
+        "fail_url": reverse_lazy("django_pay2:fail"),
     },
     "PAYEER": {
         "account": None,

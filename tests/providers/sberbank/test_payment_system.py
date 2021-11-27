@@ -1,4 +1,4 @@
-from django_pay2.providers.sberbank.create_payment import create_sberbank_payment
+from django_pay2.providers.sberbank.payment_system import Sberbank
 from django_pay2.models import Payment
 import pytest
 from decimal import Decimal as D
@@ -16,7 +16,7 @@ class TestCreateSberbankPayment:
     def test_get_options_from_payment_settings(
         self, rf, test_invoice, m_register_payment
     ):
-        create_sberbank_payment(
+        Sberbank().create_payment(
             request=rf.get("/"),
             amount=12.12,
             desc="lorem ipsum",
@@ -40,7 +40,7 @@ class TestCreateSberbankPayment:
         )
 
     def test_get_options_from_args(self, rf, test_invoice, m_register_payment):
-        create_sberbank_payment(
+        Sberbank().create_payment(
             request=rf.get("/"),
             amount=12.12,
             desc="lorem ipsum",

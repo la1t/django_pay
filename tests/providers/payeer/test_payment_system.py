@@ -2,7 +2,7 @@ import pytest
 
 from decimal import Decimal
 
-from django_pay2.providers.payeer.create_payment import create_payeer_payment
+from django_pay2.providers.payeer.payment_system import Payeer
 from django_pay2.providers.payeer.api import PayeerError
 from django_pay2.models import Payment
 from django_pay2.exceptions import CreatePaymentError
@@ -15,8 +15,7 @@ def test_positive(mocker, rf, test_invoice):
         "django_pay2.providers.payeer.api.PayeerApi.create_payment",
         return_value="https://example.com",
     )
-    payment_url = create_payeer_payment(
-        rf.get("/"),
+    payment_url = Payeer().create_payment(
         receiver=test_invoice,
         amount=Decimal(100),
         currency="USD",
@@ -40,14 +39,10 @@ def test_reject_payment_and_raise_err_if_payeer_api_returned_err(
     )
 
     with pytest.raises(CreatePaymentError):
-        create_payeer_payment(
+        Payeer().create_payment(
             request=rf.get("/"),
             receiver=test_invoice,
             amount=Decimal(100),
             currency="USD",
             desc="Test",
         )
-
-    assert Payment.objects.count() == 1
-    payment = Payment.objects.get()
-    assert payment.status == Payment.StatusType.REJECTED

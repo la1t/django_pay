@@ -7,14 +7,14 @@ from .models import Payment
 from .settings import payment_settings
 
 
-class DebugMixin(generic.View):
+class DebugOnlyMixin(generic.View):
     def dispatch(self, request, *args, **kwargs):
         if not payment_settings.DEBUG_MODE:
             raise Http404
         return super().dispatch(request, *args, **kwargs)
 
 
-class DebugPaymentView(DebugMixin, generic.DetailView):
+class DebugPaymentView(DebugOnlyMixin, generic.DetailView):
     queryset = Payment.objects.filter(status=Payment.StatusType.PENDING)
     template_name = "django_pay2/debug_payment.html"
 
@@ -22,7 +22,7 @@ class DebugPaymentView(DebugMixin, generic.DetailView):
         return self.get(request, *args, **kwargs)
 
 
-class AcceptDebugPaymentView(DebugMixin, SingleObjectMixin, generic.View):
+class AcceptDebugPaymentView(DebugOnlyMixin, SingleObjectMixin, generic.View):
     queryset = Payment.objects.filter(status=Payment.StatusType.PENDING)
 
     def post(self, request, *args, **kwargs):
@@ -31,7 +31,7 @@ class AcceptDebugPaymentView(DebugMixin, SingleObjectMixin, generic.View):
         return redirect("django_pay2:success")
 
 
-class RejectDebugPaymentView(DebugMixin, SingleObjectMixin, generic.View):
+class RejectDebugPaymentView(DebugOnlyMixin, SingleObjectMixin, generic.View):
     queryset = Payment.objects.filter(status=Payment.StatusType.PENDING)
 
     def post(self, request, *args, **kwargs):

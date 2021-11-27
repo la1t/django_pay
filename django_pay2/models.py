@@ -3,6 +3,7 @@ import uuid
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.db import models
 from django.utils import timezone
+from django_pay2.providers import get_payment_system
 
 from .signals import payment_received
 
@@ -26,6 +27,8 @@ class Payment(models.Model):
     content_type = models.ForeignKey(
         "contenttypes.ContentType", on_delete=models.CASCADE
     )
+    payment_system = models.CharField("Код платежной системы", max_length=50)
+
     receiver = GenericForeignKey()
 
     class Meta:
@@ -44,3 +47,6 @@ class Payment(models.Model):
     def reject(self):
         self.status = self.StatusType.REJECTED
         self.save()
+
+    def get_payment_system_display(self):
+        return get_payment_system(self.payment_system).verbose_name

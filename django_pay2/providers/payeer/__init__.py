@@ -1,1 +1,2 @@
-from .create_payment import create_payeer_payment
+# flake8: noqa
+from .payment_system import Payeer

@@ -1,1 +1,2 @@
-from .create_payment import create_coinpayments_payment
+# flake8: noqa
+from .payment_system import CoinPayments

@@ -1,5 +1,5 @@
 from django_pay2.models import Payment
-from django_pay2.providers.qiwi.create_payment import create_qiwi_payment
+from django_pay2.providers.qiwi.payment_system import Qiwi
 import pytest
 from decimal import Decimal as D
 
@@ -14,8 +14,8 @@ def test_create_qiwi_payment(mocker, test_invoice, rf):
         return_value=PaymentRedirect("https://example.com"),
     )
 
-    payment_method = create_qiwi_payment(
-        rf.get("/"), D("10.00"), "Lorem", test_invoice, "RUB"
+    payment_method = Qiwi().create_payment(
+        amount=D("10.00"), receiver=test_invoice, currency="RUB"
     )
 
     assert Payment.objects.count() == 1

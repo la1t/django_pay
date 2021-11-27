@@ -1,15 +1,26 @@
+import enum
+from enum import auto
 from dataclasses import dataclass
 from typing import Dict
 
 
+class PaymentMethodType(enum.Enum):
+    REDIRECT = auto()
+    FORM = auto()
+
+
+class PaymentMethod:
+    method: str
+
+
 @dataclass
-class PaymentRedirect:
+class PaymentRedirect(PaymentMethod):
     method = "redirect"
     url: str
 
 
 @dataclass
-class PaymentForm:
+class PaymentForm(PaymentMethod):
     method = "form"
     action: str
     fields: Dict[str, str]

@@ -19,7 +19,7 @@ class QiwiKassaApi:
                     "value": f"{amount:.2f}",
                     "currency": currency,
                 },
-                "expirationDateTime": expirate_at.strftime("%Y-%m-%dT%H:%M:%S+03:00"),
+                "expirationDateTime": expirate_at.strftime("%Y-%m-%dT%H:%M:%S+00:00"),
                 "flags": ["SALE"],
             },
             headers={"Authorization": f"Bearer {self.secret_key}"},
