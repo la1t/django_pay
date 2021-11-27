@@ -1,7 +1,7 @@
 import factory
 
 from django_pay2.models import Payment
-from django_pay2.payment_methods import PaymentRedirect, PaymentForm
+from django_pay2.payment_methods import PaymentForm, PaymentRedirect
 
 from .models import TestInvoice
 

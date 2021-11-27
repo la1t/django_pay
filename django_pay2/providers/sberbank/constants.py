@@ -1,4 +1,4 @@
-from django.db.models import TextChoices, IntegerChoices
+from django.db.models import IntegerChoices, TextChoices
 
 
 class SberbankCallbackOperation(TextChoices):

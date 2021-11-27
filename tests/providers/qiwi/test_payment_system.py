@@ -1,9 +1,10 @@
-from django_pay2.models import Payment
-from django_pay2.providers.qiwi.payment_system import Qiwi
-import pytest
 from decimal import Decimal as D
 
+import pytest
+
+from django_pay2.models import Payment
 from django_pay2.payment_methods import PaymentRedirect
+from django_pay2.providers.qiwi.payment_system import Qiwi
 
 pytestmark = pytest.mark.django_db
 

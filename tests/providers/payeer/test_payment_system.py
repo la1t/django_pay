@@ -1,11 +1,11 @@
-import pytest
-
 from decimal import Decimal
 
-from django_pay2.providers.payeer.payment_system import Payeer
-from django_pay2.providers.payeer.api import PayeerError
-from django_pay2.models import Payment
+import pytest
+
 from django_pay2.exceptions import CreatePaymentError
+from django_pay2.models import Payment
+from django_pay2.providers.payeer.api import PayeerError
+from django_pay2.providers.payeer.payment_system import Payeer
 
 pytestmark = pytest.mark.django_db
 

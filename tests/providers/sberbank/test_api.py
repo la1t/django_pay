@@ -1,8 +1,8 @@
 import pytest
 import responses
 
-from django_pay2.providers.sberbank.exceptions import SberbankApiError
 from django_pay2.providers.sberbank.api import SberbankApi
+from django_pay2.providers.sberbank.exceptions import SberbankApiError
 
 
 @pytest.fixture

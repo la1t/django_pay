@@ -1,6 +1,7 @@
-import requests
-import hmac
 import hashlib
+import hmac
+
+import requests
 
 from django_pay2.payment_methods import PaymentRedirect
 from django_pay2.settings import payment_settings

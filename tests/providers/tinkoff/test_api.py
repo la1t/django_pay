@@ -1,7 +1,7 @@
-from django_pay2.providers.tinkoff.api.api import TinkoffApi, TinkoffOrderItem
 import pytest
-
 import responses
+
+from django_pay2.providers.tinkoff.api.api import TinkoffApi, TinkoffOrderItem
 
 
 @responses.activate

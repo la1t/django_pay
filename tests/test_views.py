@@ -1,12 +1,11 @@
 from http import HTTPStatus
-import pytest
 
+import pytest
 from django.urls import reverse
 
 from django_pay2.models import Payment
 
 from .models import TestInvoice
-
 
 pytestmark = pytest.mark.django_db
 

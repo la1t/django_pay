@@ -1,8 +1,8 @@
 import logging
 
-from rest_framework.views import APIView
-from rest_framework import status, renderers
+from rest_framework import renderers, status
 from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from .serializers import NotifySerializer
 

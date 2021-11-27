@@ -3,8 +3,8 @@ import logging
 from rest_framework import generics
 from rest_framework.response import Response
 
-from .serializers import QiwiKassaNotifySerializer
 from .contants import NotifyType, Status
+from .serializers import QiwiKassaNotifySerializer
 
 logger = logging.getLogger(__name__)
 

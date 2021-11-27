@@ -18,7 +18,7 @@ class NotifyView(generic.View):
             payment = handle_notify(request.POST)
         except ValidationError as exc:
             msg = list(exc.detail.values())[0][0]
-            logger.info(f'Error with processing free kassa payment: {exc.detail}')
+            logger.info(f"Error with processing free kassa payment: {exc.detail}")
             return HttpResponse(f"NO: {msg}")
-        logger.info(f'Successfully paid free kassa payment {payment.id}')
+        logger.info(f"Successfully paid free kassa payment {payment.id}")
         return HttpResponse("YES")

@@ -1,2 +1,2 @@
 # flake8: noqa
-from .registry import register, get_payment_system
+from .registry import get_payment_system, register

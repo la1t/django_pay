@@ -1,19 +1,18 @@
+from decimal import Decimal as D
 from typing import List, Optional
+from uuid import UUID
 
 from django.urls import reverse
+from django.utils.translation import get_language
 from ipware.ip import get_client_ip
 
-from django.utils.translation import get_language
 from django_pay2.exceptions import CreatePaymentError
-from django_pay2.settings import payment_settings
-from django_pay2.payment_methods import PaymentRedirect
-from django_pay2.providers.base import PaymentSystem
+from django_pay2.payment_methods import PaymentMethodType, PaymentRedirect
 from django_pay2.providers import register
-from django_pay2.payment_methods import PaymentMethodType
-from uuid import UUID
-from decimal import Decimal as D
+from django_pay2.providers.base import PaymentSystem
+from django_pay2.settings import payment_settings
 
-from .api import TinkoffOrderItem, TinkoffApiError
+from .api import TinkoffApiError, TinkoffOrderItem
 from .services import get_tinkoff_api
 
 

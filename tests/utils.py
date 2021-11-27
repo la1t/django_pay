@@ -26,4 +26,4 @@ def assert_signal_sent(signal, expected_sender, **expected_kwargs):
         signal.disconnect(dispatcher)
 
     if err:
-        self.fail(err)
+        assert False, err

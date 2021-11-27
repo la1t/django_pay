@@ -2,12 +2,11 @@ import pytest
 from pytest_factoryboy import register
 
 from .factories import (
-    TestInvoiceFactory,
     PaymentFactory,
-    PaymentRedirectFactory,
     PaymentFormFactory,
+    PaymentRedirectFactory,
+    TestInvoiceFactory,
 )
-
 
 register(TestInvoiceFactory)
 register(PaymentFactory)

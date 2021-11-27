@@ -1,6 +1,7 @@
-import requests
-from urllib.parse import urljoin
 from typing import Optional
+from urllib.parse import urljoin
+
+import requests
 
 from django_pay2.payment_methods import PaymentRedirect
 

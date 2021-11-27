@@ -1,6 +1,7 @@
 import hashlib
-from django_pay2.settings import payment_settings
+
 from django_pay2.payment_methods import PaymentForm
+from django_pay2.settings import payment_settings
 from django_pay2.utils import remove_trivial_zeros
 
 

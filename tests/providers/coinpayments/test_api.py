@@ -1,7 +1,7 @@
-from django_pay2.providers.coinpayments.api import CoinPaymentsApi
-import pytest
 from decimal import Decimal as D
 from unittest.mock import MagicMock
+
+import pytest
 
 pytestmark = pytest.mark.django_db
 

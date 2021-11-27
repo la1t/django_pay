@@ -1,11 +1,13 @@
 import hashlib
 import hmac
-from django_pay2.settings import payment_settings
-from django_pay2.payment_methods import PaymentRedirect
-from django.urls import reverse_lazy
-import requests
 from urllib.parse import urlencode
+
+import requests
+from django.urls import reverse_lazy
+
 from django_pay2.exceptions import CreatePaymentError
+from django_pay2.payment_methods import PaymentRedirect
+from django_pay2.settings import payment_settings
 
 
 class CoinPaymentsApi:

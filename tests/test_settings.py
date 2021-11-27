@@ -1,4 +1,3 @@
-from django.test import SimpleTestCase
 import pytest
 
 from django_pay2.settings import ImportDict, ObjDict, PaymentSettings

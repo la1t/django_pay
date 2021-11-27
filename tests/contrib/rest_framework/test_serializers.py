@@ -1,6 +1,6 @@
 from django_pay2.contrib.rest_framework.serializers import (
-    PaymentRedirectSerializer,
     PaymentFormSerializer,
+    PaymentRedirectSerializer,
 )
 
 

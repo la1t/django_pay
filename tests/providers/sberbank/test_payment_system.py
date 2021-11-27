@@ -1,7 +1,9 @@
-from django_pay2.providers.sberbank.payment_system import Sberbank
-from django_pay2.models import Payment
-import pytest
 from decimal import Decimal as D
+
+import pytest
+
+from django_pay2.models import Payment
+from django_pay2.providers.sberbank.payment_system import Sberbank
 
 pytestmark = pytest.mark.django_db
 

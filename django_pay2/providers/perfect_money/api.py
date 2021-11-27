@@ -1,7 +1,9 @@
 import hashlib
-from django_pay2.settings import payment_settings
-from django_pay2.payment_methods import PaymentForm
+
 from django.urls import reverse_lazy
+
+from django_pay2.payment_methods import PaymentForm
+from django_pay2.settings import payment_settings
 
 
 class PerfectMoneyApi:

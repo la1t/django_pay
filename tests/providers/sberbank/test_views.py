@@ -1,5 +1,6 @@
 import pytest
 from django.urls import reverse
+
 from django_pay2.models import Payment
 
 pytestmark = pytest.mark.django_db

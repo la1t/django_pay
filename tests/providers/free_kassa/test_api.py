@@ -1,6 +1,8 @@
-from django_pay2.providers.free_kassa.api import FreeKassaApi
-import pytest
 import uuid
+
+import pytest
+
+from django_pay2.providers.free_kassa.api import FreeKassaApi
 
 pytestmark = pytest.mark.django_db
 

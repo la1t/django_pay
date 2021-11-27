@@ -1,8 +1,10 @@
-from django.urls import reverse
-import pytest
-from rest_framework import status
-from django_pay2.models import Payment
 from urllib.parse import urlencode
+
+import pytest
+from django.urls import reverse
+from rest_framework import status
+
+from django_pay2.models import Payment
 
 pytestmark = pytest.mark.django_db
 

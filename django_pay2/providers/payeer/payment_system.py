@@ -1,12 +1,13 @@
-from django_pay2.exceptions import CreatePaymentError
-from uuid import UUID
 from decimal import Decimal as D
+from uuid import UUID
+
+from django_pay2.exceptions import CreatePaymentError
+from django_pay2.payment_methods import PaymentMethodType
 from django_pay2.providers import register
 from django_pay2.providers.base import PaymentSystem
-from django_pay2.payment_methods import PaymentMethodType
 
-from .functions import get_payeer_api
 from .exceptions import PayeerError
+from .functions import get_payeer_api
 
 
 @register

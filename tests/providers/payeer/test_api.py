@@ -1,5 +1,6 @@
-import factory
 from decimal import Decimal
+
+import factory
 import pytest
 
 from django_pay2.models import Payment

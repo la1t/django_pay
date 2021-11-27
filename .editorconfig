@@ -12,12 +12,11 @@ max_line_length = 100
 [*.py]
 indent_size = 4
 line_length = 88
-known_first_party = testproject
-multi_line_output = 3
+line_width = 88
+max_line_length = 88
+profile = black
+known_first_party = testproject, django_pay2
 default_section = THIRDPARTY
 recursive = true
 skip = .venv/
 skip_glob = **/migrations/*.py
-include_trailing_comma = true
-force_grid_wrap = 0
-use_parentheses = true

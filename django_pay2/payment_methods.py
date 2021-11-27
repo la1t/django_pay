@@ -1,6 +1,6 @@
 import enum
-from enum import auto
 from dataclasses import dataclass
+from enum import auto
 from typing import Dict
 
 

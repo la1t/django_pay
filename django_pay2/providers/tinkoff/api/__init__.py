@@ -2,10 +2,10 @@
 from .api import TinkoffApi, TinkoffOrderItem
 from .constants import (
     Languages,
+    PaymentMethods,
+    PaymentObjects,
     PayTypes,
     Taxations,
-    PaymentMethods,
     Taxes,
-    PaymentObjects,
 )
 from .exceptions import TinkoffApiError, TinkoffNetworkError, TinkoffResponseError

@@ -1,10 +1,10 @@
-from django.views import generic
+from django.http import HttpResponse, QueryDict
 from django.utils.decorators import method_decorator
+from django.views import generic
 from django.views.decorators.csrf import csrf_exempt
-from django.http import QueryDict, HttpResponse
 
-from .serializers import CoinPaymentsApproveSerializer
 from .api import get_api
+from .serializers import CoinPaymentsApproveSerializer
 
 
 @method_decorator(csrf_exempt, "dispatch")

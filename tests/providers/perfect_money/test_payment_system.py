@@ -1,9 +1,9 @@
-import pytest
-
 from decimal import Decimal as D
 
-from django_pay2.providers.perfect_money.payment_system import PerfectMoney
+import pytest
+
 from django_pay2.models import Payment
+from django_pay2.providers.perfect_money.payment_system import PerfectMoney
 
 pytestmark = pytest.mark.django_db
 

@@ -1,10 +1,12 @@
-import requests
 import decimal
 import hashlib
 
+import requests
+
 from django_pay2.models import Payment
-from .exceptions import PayeerError, PayeerValidationError, AlreadyPaid
 from django_pay2.payment_methods import PaymentRedirect
+
+from .exceptions import AlreadyPaid, PayeerError, PayeerValidationError
 
 
 class PayeerApi:

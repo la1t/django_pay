@@ -1,6 +1,6 @@
+from django_pay2.payment_methods import PaymentMethodType
 from django_pay2.providers import register
 from django_pay2.providers.base import PaymentSystem
-from django_pay2.payment_methods import PaymentMethodType
 
 from .api import get_api
 

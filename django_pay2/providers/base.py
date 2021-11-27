@@ -1,13 +1,14 @@
 from decimal import Decimal as D
 from typing import Any
 from uuid import UUID
+
 from django.urls import reverse
 
 from django_pay2.models import Payment
 from django_pay2.payment_methods import (
     PaymentForm,
-    PaymentMethodType,
     PaymentMethod,
+    PaymentMethodType,
     PaymentRedirect,
 )
 from django_pay2.settings import payment_settings

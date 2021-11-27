@@ -1,5 +1,6 @@
-import pytest
 from decimal import Decimal as D
+
+import pytest
 
 pytestmark = pytest.mark.django_db
 

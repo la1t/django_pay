@@ -1,6 +1,7 @@
-from django_pay2.providers import get_payment_system
 from decimal import Decimal as D
 from typing import Any
+
+from django_pay2.providers import get_payment_system
 
 
 def create_payment(amount: D, receiver: Any, payment_system_name: str, **kwargs):

@@ -1,10 +1,10 @@
 import logging
 
-from django.views.generic import View
 from django.http import HttpResponse
+from django.views.generic import View
 
+from .constants import SberbankCallbackOperation, SberbankCallbackStatus
 from .serializers import SberbankCallbackSerializer
-from .constants import SberbankCallbackStatus, SberbankCallbackOperation
 
 logger = logging.getLogger(__file__)
 

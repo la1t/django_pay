@@ -1,5 +1,7 @@
-import pytest
 from decimal import Decimal as D
+
+import pytest
+
 from django_pay2.providers.perfect_money.serializers import PerfectMoneyNotifySerializer
 
 pytestmark = pytest.mark.django_db

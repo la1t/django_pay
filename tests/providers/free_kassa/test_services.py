@@ -1,7 +1,8 @@
-from rest_framework.exceptions import ValidationError
-from django_pay2.providers.free_kassa.services import handle_notify
 import pytest
+from rest_framework.exceptions import ValidationError
+
 from django_pay2.models import Payment
+from django_pay2.providers.free_kassa.services import handle_notify
 
 pytestmark = pytest.mark.django_db
 
