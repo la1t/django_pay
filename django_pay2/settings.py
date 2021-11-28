@@ -4,6 +4,18 @@ from django.urls import reverse_lazy
 from django.utils.module_loading import import_string
 
 DEFAULTS = {
+    # todo: сделать опцию, которая будет импортировать подключаемые платежные системы,
+    # что позволит сделать подключаемые платежные системы, которые будут удобнее в отладке
+    "ENABLED_PAYMENT_SYSTEMS": [
+        "coinpayments",
+        "free_kassa",
+        "payeer",
+        "perfect_money",
+        "qiwi",
+        "qiwi_kassa",
+        "sberbank",
+        "tinkoff",
+    ],
     "DEBUG_MODE": False,
     "TEMPLATES": {
         "success": "django_pay2/success_payment.html",
